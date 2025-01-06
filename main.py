@@ -1,11 +1,9 @@
 import cv2 as cv
 import numpy as np
 import pyautogui
-import threading
 
-cv.namedWindow("Screen Capture", cv.WINDOW_NORMAL)
-needle_img = cv.imread("acceptButton.jpg")  # searching for accept button
-threshold = 0.5  # Threshold for confidence score
+needle_img = cv.imread("acceptButton.jpg")  
+threshold = 0.6  # Threshold for confidence score
 needle_w = needle_img.shape[1]
 needle_h = needle_img.shape[0]
 
@@ -45,16 +43,5 @@ def main():
             mouse_click(top_left[0] + needle_w / 2, top_left[1] + needle_h / 2)
         else:
             print("Searching for Accept Button...")
-
-
-thread_main = threading.Thread(target=main)
-thread_capture_screen = threading.Thread(target=capture_screen, daemon=True)
-
-all_threads = [
-    thread_main,
-    thread_capture_screen,
-]
-for th in all_threads:
-    th.start()
 
 main()
